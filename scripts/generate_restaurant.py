@@ -1,16 +1,20 @@
 import random
+import os
 import pandas as pd
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ==========================
 # MySQL Connection
 # ==========================
 
-USERNAME = "root"
-PASSWORD = "170106"
-HOST = "localhost"
-PORT = 3306
-DATABASE = "zomato_analytics"
+USERNAME = os.getenv("DB_USERNAME")
+PASSWORD = os.getenv("DB_PASSWORD")
+HOST = os.getenv("DB_HOST", "localhost")
+PORT = int(os.getenv("DB_PORT", 3306))
+DATABASE = os.getenv("DB_NAME")
 
 engine = create_engine(
     f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
