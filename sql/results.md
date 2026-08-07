@@ -49,3 +49,36 @@ or price/portion visibility.
 (22.7%–23.0%) — a spread of ~1 percentage point, well within normal variation. This
 **rules out** the hypothesis of an Android-specific conversion issue in this dataset.
 No city or device shows a meaningfully underperforming funnel.
+
+
+## 3. Coupon Effectiveness — Part A: Completion Rate
+**File:** [`03_coupon_effectiveness.sql`](./03_coupon_effectiveness.sql)
+**Question:** Does applying a coupon increase the chance a cart converts to an order?
+
+| Coupon Applied  | Sessions with Cart | Sessions Completed | Completion % |
+|-----------------|--------------------:|---------------------:|---------------:|
+| Coupon Applied  | 9,740               | 7,200                | 73.92           |
+| No Coupon       | 7,324               | 4,235                | 57.82           |
+
+**Takeaway:** Applying a coupon lifts cart-to-order completion from 57.82% to 73.92% —
+a ~16 percentage point (≈28% relative) increase. Unlike order value (which barely moves —
+see Part B), coupons have a real, measurable effect on whether a cart converts at all.
+
+
+## 3. Coupon Effectiveness — Part B: Cost & Net Revenue
+**File:** [`03_coupon_effectiveness.sql`](./03_coupon_effectiveness.sql)
+**Question:** What does the discount cost per order, and does it still pay off?
+
+| Used Coupon  | Total Orders | Avg Order Value | Avg Discount Given | Avg Net Revenue | Delivered % |
+|--------------|-------------:|------------------:|----------------------:|-------------------:|--------------:|
+| Used Coupon  | 7,200        | 867.90             | 89.33                  | 805.72              | 96.88          |
+| No Coupon    | 4,235        | 874.92             | 0.00                   | 910.97              | 96.79          |
+
+**Combined verdict (Part A + Part B):** Coupons cost ₹89.33 per order on average, cutting
+net revenue per order by ~11.6% (₹910.97 → ₹805.72). But because coupons lift cart-to-order
+completion from 57.82% to 73.92% (Part A), they generate significantly more *orders* from
+the same pool of carts. Modeling the counterfactual — the same 9,740 cart sessions converting
+at the no-coupon rate instead — coupons produced an estimated **~₹670,600 more total revenue**
+than not offering them, even after the discount cost. **Net verdict: coupons are worth it in
+this dataset**, driven by volume, not order value. Delivered % is essentially unaffected either
+way (96.88% vs 96.79%), so the extra volume isn't coming at the cost of order quality.
