@@ -121,3 +121,21 @@ size has no meaningful effect on payment failure in this dataset. Combined with 
 this suggests payment failures here are close to random noise rather than driven by any
 identifiable pattern (method or value) — consistent with how failures were generated
 (a flat probability applied uniformly).
+
+
+
+## 5. Delivery Delay vs Restaurant Rating — Part A: On-Time vs Delayed
+**File:** [`05_delivery_rating_analysis.sql`](./05_delivery_rating_analysis.sql)
+**Question:** Do delayed orders come from lower-rated restaurants?
+
+| Delivery Status | Total Orders | Avg Restaurant Rating | Avg Delivery Time (min) |
+|------------------|---------------:|-------------------------:|----------------------------:|
+| On Time          | 8,373          | 4.23                      | 35.3                         |
+| Delayed          | 2,701          | 4.21                      | 63.0                         |
+
+**Takeaway:** No meaningful difference in rating between on-time and delayed orders
+(4.23 vs 4.21). This is expected given the schema: `rating` is a static, restaurant-level
+attribute rather than a per-order rating, so it can't reflect how a customer felt about
+*this specific* delivery. A production dataset would need a per-order rating field to
+properly test whether delays hurt customer satisfaction — worth noting as a schema
+limitation rather than treating this as evidence delays don't matter.
