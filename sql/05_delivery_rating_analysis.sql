@@ -24,3 +24,34 @@ FROM orders o
 JOIN restaurants r ON o.restaurant_id = r.restaurant_id
 WHERE o.order_status = 'Delivered'
 GROUP BY delivery_status;
+
+
+
+-- ============================================
+-- 05B. Restaurant-Level Delay Rate vs Rating
+-- Question: Do restaurants that delay more often have lower ratings?
+-- ============================================
+
+-- OUTPUT COLUMN MEANINGS:
+-- restaurant_id / restaurant_name = the restaurant
+-- rating                            = its listed rating
+-- total_delivered                    = how many delivered orders it has
+-- delayed_orders                      = how many of those were delayed
+-- delay_rate_pct                       = % of its orders that were delayed
+
+SELECT
+    r.restaurant_id,
+    r.restaurant_name,
+    r.rating,
+    COUNT(*) AS total_delivered,
+    SUM(CASE WHEN o.delivery_time_minutes > r.avg_delivery_time THEN 1 ELSE 0 END) AS delayed_orders,
+    ROUND(
+        SUM(CASE WHEN o.delivery_time_minutes > r.avg_delivery_time THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2
+    ) AS delay_rate_pct
+FROM orders o
+JOIN restaurants r ON o.restaurant_id = r.restaurant_id
+WHERE o.order_status = 'Delivered'
+GROUP BY r.restaurant_id, r.restaurant_name, r.rating
+HAVING COUNT(*) >= 10   -- ignore restaurants with too few orders to be meaningful
+ORDER BY delay_rate_pct DESC
+LIMIT 20;

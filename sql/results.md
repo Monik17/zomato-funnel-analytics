@@ -139,3 +139,38 @@ attribute rather than a per-order rating, so it can't reflect how a customer fel
 *this specific* delivery. A production dataset would need a per-order rating field to
 properly test whether delays hurt customer satisfaction — worth noting as a schema
 limitation rather than treating this as evidence delays don't matter.
+
+
+
+## 5. Delivery Delay vs Restaurant Rating — Part B: Restaurant-Level Delay Ranking
+**File:** [`05_delivery_rating_analysis.sql`](./05_delivery_rating_analysis.sql)
+**Question:** Which restaurants delay most often, and are they lower-rated?
+
+| Restaurant ID | Restaurant Name    | Rating | Total Delivered | Delayed | Delay Rate % |
+|---------------:|---------------------|--------:|-------------------:|---------:|----------------:|
+| 208             | Classic Bistro       | 3.8     | 18                  | 13       | 72.22            |
+| 483             | Burger King          | 4.4     | 10                  | 7        | 70.00            |
+| 581             | Golden Restaurant    | 3.8     | 13                  | 8        | 61.54            |
+| 318             | Giani's              | 3.8     | 12                  | 7        | 58.33            |
+| 249             | Gupta Dhaba          | 3.5     | 13                  | 7        | 53.85            |
+| 378             | Giani's              | 3.9     | 15                  | 8        | 53.33            |
+| 569             | Sharma Restaurant    | 3.3     | 21                  | 11       | 52.38            |
+| 332             | Faasos               | 4.7     | 14                  | 7        | 50.00            |
+| 516             | Bombay Restaurant    | 3.7     | 19                  | 9        | 47.37            |
+| 434             | Oven Story Pizza     | 4.1     | 19                  | 9        | 47.37            |
+| 282             | Indori Bistro        | 3.5     | 11                  | 5        | 45.45            |
+| 523             | Desi House           | 3.7     | 20                  | 9        | 45.00            |
+| 27              | Starbucks            | 4.1     | 20                  | 9        | 45.00            |
+| 549             | Delhi Restaurant     | 4.2     | 18                  | 8        | 44.44            |
+| 288             | Taste of Dhaba       | 4.3     | 16                  | 7        | 43.75            |
+| 235             | Sharma Dhaba         | 4.3     | 21                  | 9        | 42.86            |
+| 489             | Haldiram's           | 4.1     | 21                  | 9        | 42.86            |
+| 260             | Desi House           | 4.1     | 14                  | 6        | 42.86            |
+| 555             | Classic Express      | 3.6     | 14                  | 6        | 42.86            |
+| 74              | Oven Story Pizza     | 3.9     | 19                  | 8        | 42.11            |
+
+**Takeaway:** The top-20 highest-delay restaurants span ratings from 3.3 to 4.7, with no
+pattern toward lower-rated restaurants — well-rated chains like Burger King (4.4) and
+Faasos (4.7) appear alongside lower-rated ones. This confirms Part A: delay rate and
+`rating` are unrelated in this dataset, consistent with `rating` being a static field
+unaffected by individual order outcomes.
