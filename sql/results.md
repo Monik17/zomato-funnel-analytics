@@ -82,3 +82,42 @@ at the no-coupon rate instead — coupons produced an estimated **~₹670,600 mo
 than not offering them, even after the discount cost. **Net verdict: coupons are worth it in
 this dataset**, driven by volume, not order value. Delivered % is essentially unaffected either
 way (96.88% vs 96.79%), so the extra volume isn't coming at the cost of order quality.
+
+
+
+## 4. Payment Failure Analysis — Part A: By Method
+**File:** [`04_payment_failure_analysis.sql`](./04_payment_failure_analysis.sql)
+**Question:** Which payment method has the highest failure rate?
+
+| Payment Method   | Total Attempts | Failed | Failure Rate % |
+|------------------|----------------:|-------:|------------------:|
+| Cash on Delivery | 601              | 83     | 13.81              |
+| Wallet           | 1,541            | 203    | 13.17              |
+| UPI              | 5,944            | 742    | 12.48              |
+| Net Banking      | 1,072            | 131    | 12.22              |
+| Credit Card      | 1,949            | 229    | 11.75              |
+| Debit Card       | 1,934            | 218    | 11.27              |
+
+**Takeaway:** Failure rates are fairly close across methods (11.27%–13.81%), with Cash on
+Delivery and Wallet slightly higher than card-based methods. Not a dramatic outlier — the
+gap (~2.5 pts) is modest, but if this were a real product, COD/Wallet would still be the
+first place to investigate (e.g. wallet balance checks, COD order confirmation flow).
+
+
+
+## 4. Payment Failure Analysis — Part B: By Order Value
+**File:** [`04_payment_failure_analysis.sql`](./04_payment_failure_analysis.sql)
+**Question:** Do bigger or smaller orders fail more often?
+
+| Order Value Bucket | Total Attempts | Failed | Failure Rate % |
+|---------------------|-----------------:|-------:|------------------:|
+| Q1 (Lowest value)   | 3,261             | 407    | 12.48              |
+| Q2                  | 3,260             | 392    | 12.02              |
+| Q3                  | 3,260             | 398    | 12.21              |
+| Q4 (Highest value)  | 3,260             | 409    | 12.55              |
+
+**Takeaway:** Failure rate is flat (~12.0%–12.6%) across all order value quartiles — order
+size has no meaningful effect on payment failure in this dataset. Combined with Part A,
+this suggests payment failures here are close to random noise rather than driven by any
+identifiable pattern (method or value) — consistent with how failures were generated
+(a flat probability applied uniformly).
