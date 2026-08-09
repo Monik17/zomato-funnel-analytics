@@ -207,3 +207,17 @@ was assigned as an independent random flag at signup, not tied to actual orderin
 so there was never a real mechanism for premium status to drive more frequent ordering in
 this synthetic dataset. In a real product, you'd expect premium (e.g. free delivery, faster
 support) to show a genuine lift here.
+
+
+## 7. Dashboard Master View
+**File:** [`07_dashboard_master_view.sql`](./07_dashboard_master_view.sql)
+**Purpose:** A single flattened view (`vw_orders_master`) combining orders + users +
+restaurants into one row per order — this is the main table Power BI connects to for
+slicing/filtering by any dimension (city, cuisine, device, premium status, coupon usage,
+delivery status, etc.) without needing a separate SQL query for every possible breakdown.
+
+**Sample columns:** order_id, order_date, order_value, net_revenue, payment_method,
+payment_status, order_status, user_city, gender, age, is_premium, device_type,
+restaurant_name, restaurant_city, cuisine, restaurant_rating, delivery_status, coupon_used
+
+**Row count:** 13,041 (one row per order)
