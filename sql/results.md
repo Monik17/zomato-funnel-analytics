@@ -174,3 +174,36 @@ pattern toward lower-rated restaurants — well-rated chains like Burger King (4
 Faasos (4.7) appear alongside lower-rated ones. This confirms Part A: delay rate and
 `rating` are unrelated in this dataset, consistent with `rating` being a static field
 unaffected by individual order outcomes.
+
+
+
+## 6. Reorder / Repeat Purchase — Part A: Overall
+**File:** [`06_reorder_analysis.sql`](./06_reorder_analysis.sql)
+**Question:** What % of customers who order once come back and order again?
+
+| Total Customers | Repeat Customers | Repeat Rate % |
+|-------------------:|---------------------:|------------------:|
+| 4,535               | 3,352                 | 73.91              |
+
+**Takeaway:** 73.91% of customers who placed a successful order went on to order again.
+This is high relative to real-world food delivery benchmarks — largely a byproduct of the
+generator's volume (13K orders spread across just 5K users over 6 months, ~2.6 orders/user
+on average), not necessarily evidence of strong product stickiness. Still useful as a
+baseline to compare premium vs regular segments against (Part B).
+
+
+## 6. Reorder / Repeat Purchase — Part B: Premium vs Regular
+**File:** [`06_reorder_analysis.sql`](./06_reorder_analysis.sql)
+**Question:** Do premium users reorder more than regular users?
+
+| User Type | Total Customers | Repeat Customers | Repeat Rate % | Avg Orders/Customer |
+|-----------|-------------------:|---------------------:|------------------:|------------------------:|
+| Regular   | 3,618               | 2,678                 | 74.02              | 2.53                     |
+| Premium   | 917                 | 674                   | 73.50              | 2.49                     |
+
+**Takeaway:** No meaningful difference between premium and regular users (74.02% vs 73.50%
+repeat rate, 2.53 vs 2.49 avg orders). Expected given the schema/generator — `is_premium`
+was assigned as an independent random flag at signup, not tied to actual ordering behavior,
+so there was never a real mechanism for premium status to drive more frequent ordering in
+this synthetic dataset. In a real product, you'd expect premium (e.g. free delivery, faster
+support) to show a genuine lift here.
