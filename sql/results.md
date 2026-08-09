@@ -221,3 +221,10 @@ payment_status, order_status, user_city, gender, age, is_premium, device_type,
 restaurant_name, restaurant_city, cuisine, restaurant_rating, delivery_status, coupon_used
 
 **Row count:** 13,041 (one row per order)
+
+
+## 8. GMV & Orders Trend Over Time
+**File:** [`08_gmv_trend.sql`](./08_gmv_trend.sql)
+**Purpose:** Daily GMV, net revenue, and order count — feeds the trend line chart in Power BI.
+**Output:** ~180 daily rows (one per day, Feb–Aug 2026). Not shown as a full table here;
+see Power BI dashboard for the visualized trend.
