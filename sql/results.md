@@ -228,3 +228,29 @@ restaurant_name, restaurant_city, cuisine, restaurant_rating, delivery_status, c
 **Purpose:** Daily GMV, net revenue, and order count — feeds the trend line chart in Power BI.
 **Output:** ~180 daily rows (one per day, Feb–Aug 2026). Not shown as a full table here;
 see Power BI dashboard for the visualized trend.
+
+
+## 9. Revenue by City
+**File:** [`09_city_revenue.sql`](./09_city_revenue.sql)
+**Question:** Which cities generate the most GMV and net revenue?
+
+| City       | Total Orders | GMV          | Net Revenue  | Avg Order Value | % of Total GMV |
+|------------|---------------:|---------------:|---------------:|-------------------:|------------------:|
+| Mumbai     | 1,325           | 1,153,428.28    | 1,125,980.37    | 870.51              | 11.59              |
+| Jaipur     | 1,208           | 1,054,808.52    | 1,023,337.51    | 873.19              | 10.60              |
+| Pune       | 1,203           | 1,020,831.86    | 991,180.40      | 848.57              | 10.26              |
+| Ahmedabad  | 1,163           | 997,776.62      | 967,633.99      | 857.93              | 10.02              |
+| Kolkata    | 1,109           | 993,217.52      | 965,121.28      | 895.60              | 9.98               |
+| Delhi      | 1,118           | 973,660.61      | 943,302.16      | 870.90              | 9.78               |
+| Bangalore  | 1,148           | 972,395.22      | 942,522.41      | 847.03              | 9.77               |
+| Indore     | 1,072           | 963,473.15      | 931,607.63      | 898.76              | 9.68               |
+| Chennai    | 1,059           | 924,694.54      | 896,141.60      | 873.18              | 9.29               |
+| Hyderabad  | 1,030           | 899,888.19      | 872,350.06      | 873.68              | 9.04               |
+
+**Takeaway:** Mumbai leads on GMV (11.59% of total revenue) despite Query 2 showing it
+was actually *below-average* on conversion rate (22.74% vs 22.87% overall) — it wins on
+revenue purely through higher order volume (1,325 orders, the most of any city), not
+conversion efficiency. Conversely, Ahmedabad had the *best* conversion rate (23.56%,
+Query 2) but ranks only 4th on GMV — its user base is smaller. This is a good example of
+why conversion % and revenue need to be looked at together: optimizing one doesn't
+automatically move the other.
