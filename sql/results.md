@@ -254,3 +254,31 @@ conversion efficiency. Conversely, Ahmedabad had the *best* conversion rate (23.
 Query 2) but ranks only 4th on GMV — its user base is smaller. This is a good example of
 why conversion % and revenue need to be looked at together: optimizing one doesn't
 automatically move the other.
+
+## 10. Cuisine Performance
+**File:** [`10_cuisine_performance.sql`](./10_cuisine_performance.sql)
+**Question:** Which cuisines drive the most orders/revenue, and which have the worst delivery reliability?
+
+| Cuisine       | Restaurants | Orders | GMV          | Avg Order Value | Delayed % | Avg Rating |
+|---------------|-------------:|--------:|---------------:|-------------------:|-------------:|--------------:|
+| Pizza         | 80           | 1,565   | 2,076,063.02    | 1,326.56            | 24.49         | 4.32           |
+| Biryani       | 67           | 1,245   | 1,376,222.24    | 1,105.40            | 23.04         | 4.18           |
+| Desserts      | 83           | 1,611   | 1,082,018.64    | 671.64              | 25.53         | 4.25           |
+| Fast Food     | 77           | 1,484   | 912,190.86      | 614.68              | 24.52         | 4.23           |
+| North Indian  | 45           | 872     | 849,032.77      | 973.66              | 23.87         | 4.14           |
+| Cafe          | 53           | 997     | 737,946.77      | 740.17              | 23.99         | 4.27           |
+| Chinese       | 38           | 733     | 643,900.68      | 878.45              | 22.22         | 4.23           |
+| Italian       | 29           | 492     | 599,341.42      | 1,218.17            | 26.83         | 4.02           |
+| BBQ           | 20           | 376     | 544,675.68      | 1,448.61            | 23.27         | 4.36           |
+| South Indian  | 38           | 723     | 401,564.47      | 555.41              | 25.00         | 4.19           |
+| Healthy       | 20           | 385     | 309,638.39      | 804.26              | 22.75         | 4.37           |
+| Rolls         | 20           | 385     | 255,321.57      | 663.17              | 26.68         | 4.40           |
+| Street Food   | 30           | 567     | 166,258.00      | 293.22              | 25.23         | 4.00           |
+
+**Takeaway:** Pizza leads on GMV (₹20.76L, ~2x the next cuisine) driven by both restaurant
+count (80) and order volume (1,565) — the biggest category overall. But **BBQ (₹1,448.61)**
+and **Pizza (₹1,326.56)** have the highest average order values, while **Street Food
+(₹293.22)** and **South Indian (₹555.41)** are much smaller-basket categories — useful for
+product decisions like minimum order thresholds or targeted upsell prompts by cuisine.
+Delay rates are fairly flat across cuisines (22%–27%), no cuisine stands out as
+structurally worse for delivery reliability.
