@@ -56,7 +56,13 @@ Overall conversion rate = Order Placed sessions / App Open sessions × 100
 Stage drop-off rate     = (Previous stage sessions - Current stage sessions)
                           / Previous stage sessions × 100
 ```
+## 🗃️ Database Schema
 
+The project uses a relational MySQL database consisting of
+seven interconnected tables to analyze user behavior,
+transactions, and order conversion.
+
+![Zomato Database Schema](schema.png)
 ## 💡 Insights & Product Recommendations
 
 | Finding in the simulated data | Product implication / next step |
@@ -121,6 +127,7 @@ The `data/` directory and `.env` file are **not committed**. Generator scripts w
 
 **Prerequisites:** Python 3.10+, a running MySQL server, and MySQL credentials with permission to create tables. Power BI Desktop is needed only to open the `.pbix` dashboard.
 
+
 ### 1. Clone and install dependencies
 
 ```bash
@@ -176,6 +183,8 @@ python scripts/backfill_order_placed_events.py
 The scripts use append-mode database inserts and are intended for a **fresh database**. Re-running them without clearing prior data can create duplicates or mismatched results. The final backfill script adds successful `order_placed` events so that the funnel's last stage is populated.
 
 > **Reproducibility note:** Random seeds are not fixed, and session dates are generated relative to the current date. Your results will therefore differ somewhat from the reference metrics shown above.
+
+
 
 ### 5. Explore and analyze
 
